@@ -3,9 +3,9 @@ from sanic.response import json
 
 app = Sanic()
 
-@app.route("/hello")
-async def hello(request):
-    return json({"hello": "world"})
+@app.route("/echo")
+async def echo(request):
+    return json({"recieved": True, "data": request.json})
 
 @app.route("/upsert_notes")
 async def upsert_notes(request):
