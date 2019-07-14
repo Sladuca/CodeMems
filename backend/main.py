@@ -12,16 +12,6 @@ async def print_request(request):
     print(request.path)
     print(request.json)
 
-# # allow cors CORS for now
-# @app.middleware('request')
-# async def allow_cors(request):
-#     if request.method == "OPTIONS":
-#         return response.json(
-#         {"allow": "CORS"},
-#         headers={"Access-Control-Allow-Methods": ["POST", "GET", "OPTIONS"]},
-#         status=200,
-#         )
-
 @app.listener("before_server_start")
 async def setup_db(app, loop):
     app.mongoClient = motor.motor_asyncio.AsyncIOMotorClient('localhost', 27017,
