@@ -8,6 +8,9 @@ app = Sanic()
 @app.middleware('request')
 async def is_valid_request(request):
     # for each route, implement a function that checks validity
+    if request.path == "/add_notes":
+        print type(request.json)
+        return isInstance(request.json, list)
     pass
 
 @app.listener("before_server_start")
@@ -25,6 +28,7 @@ async def echo(request):
 async def add_notes(request):
     data = request.json
     requests = []
+    rejected = 0
     for document in data:
         # aggregate bulk add replace upsert; identical documents get overwritten
         requests.append([replaceOne(data, data, upsert=True)])
