@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 const state = {
   notes: [
     {
@@ -35,6 +37,7 @@ const actions = {
         ]
       }
     }
+    const response = await axios.post("http://localhost:8000/add_notes", [newNote]);
     commit('newNote', newNote)
   }
 }
