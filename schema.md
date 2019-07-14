@@ -29,7 +29,7 @@ Example function signature `CARD` type note:
 ```
 [{
   id: 1,
-  note-type: CARD,
+  note-type: "CARD",
   data: {
     fields: {
       "API Function": "numpy.zeros function signature",
@@ -47,7 +47,7 @@ Example usage `CLOZE` type note
 ```
 [{
   id: 2,
-  note-type: CLOZE,
+  note-type: "CLOZE",
   data: {
     text: "Generate a 2x1 numpy i32 array filled with zeros:\n {{1}}",
     cloze: {
