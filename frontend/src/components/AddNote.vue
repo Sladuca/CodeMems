@@ -22,7 +22,9 @@ export default {
     ...mapActions(['addNote']),
     clickAddNote(event){
       event.preventDefault();
-      this.addNote(this)
+      this.addNote(this);
+      this.front = "";
+      this.back = "";
     }
   }
 }
