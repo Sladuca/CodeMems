@@ -37,8 +37,8 @@ Example function signature `CARD` type note:
       "Return-value": "ndarray with all zeros"
     },
     cards: {
-    "API Function": Parameters,
-    "API Function": Return-value
+    ["API Function", "Parameters"],
+    ["API Function", "Return-value"]
     }
   }
 }
@@ -81,6 +81,16 @@ Example function signature card from above `CARD` type example:
   no: null,
   front: "numpy.zeros (Parameters)",
   back: "shape, dtype (optional), order (optional)"
+}
+```
+
+### Scheduling Info ###
+object containing scheduling info. For now, just date for next review.
+
+example:
+```
+{
+  next-review: 2020-01-01T00:00:00.000Z
 }
 ```
 
