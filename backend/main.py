@@ -1,15 +1,40 @@
-from sanic import Sanic
-from sanic.response import json
+from sanic import Sanic, response
+import motor.motor_asyncio
+from pymongo import replaceOne
 
 app = Sanic()
+
+# validate requests
+@app.middleware('request')
+async def is_valid_request(request):
+    # for each route, implement a function that checks validity
+    pass
+
+@app.listener("before_server_start")
+async def setup_db(app, loop):
+    app.mongoClient = motor.motor_asyncio.AsyncIOMotorClient('localhost', 27017,
+        io_loop=loop)
+    app.Notes = app.mongoClient['Notes']
+    app.Cards = app.mongoClient['Cards']
 
 @app.route("/echo")
 async def echo(request):
     return json({"recieved": True, "data": request.json})
 
-@app.route("/upsert_notes")
-async def upsert_notes(request):
-    return json({"route": "unimplemented"})
+@app.route("/add_notes", methods=["POST"])
+async def add_notes(request):
+    data = request.json
+    requests = []
+    for document in data:
+        # aggregate bulk add replace upsert; identical documents get overwritten
+        requests.append([replaceOne(data, data, upsert=True)])
+    res = await app.Notes.bulk_write(requests, ordered=False)
+    return json(
+        {
+            "message": "inserted %d, replaced %d" %
+            (res.inserted_count, res.modified_count)
+        },
+        status=200)
 
 @app.route("/delete_notes")
 async def delete_notes(request):
