@@ -4,7 +4,7 @@ This file contains documentation for data formats for JSON and the database
 
 ## JSON Data ##
 
-Data to formats to be sent to/from client applications to backend via HTTP requests
+Data to formats to be sent to/from client applications to backend via HTTP requests. In requests, ALL data must be enclosed in a singleton list, and empty lists are invalid.
 
 ### Note ###
 
@@ -27,7 +27,7 @@ Eventually support more types, in addition to adding custom types.
 
 Example function signature `CARD` type note:
 ```
-{
+[{
   id: 1,
   note-type: CARD,
   data: {
@@ -41,11 +41,11 @@ Example function signature `CARD` type note:
     ["API Function", "Return-value"]
     }
   }
-}
+}]
 ```
 Example usage `CLOZE` type note
 ```
-{
+[{
   id: 2,
   note-type: CLOZE,
   data: {
@@ -54,7 +54,7 @@ Example usage `CLOZE` type note
       1: res = np.zeros((2, 1))
     }
   }
-}
+}]
 ```
 
 ### Card ###
@@ -74,14 +74,14 @@ Data structure for storing a specific review item and it's scheduling informatio
 
 Example function signature card from above `CARD` type example:
 ```
-{
+[{
   id: 1,
   note-id: 1,
   scheduling-info: {...},
   no: null,
   front: "numpy.zeros (Parameters)",
   back: "shape, dtype (optional), order (optional)"
-}
+}]
 ```
 
 ### Scheduling Info ###
@@ -95,3 +95,5 @@ example:
 ```
 
 ## DB data
+
+We're using MongoDB, so it's exactly the same!
