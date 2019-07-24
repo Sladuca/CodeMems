@@ -1,10 +1,10 @@
 from sanic import Sanic, response
 import motor.motor_asyncio
 from pymongo import ReplaceOne
-from sanic_cors import CORS, cross_origin
+#from sanic_cors import CORS, cross_origin
 
 app = Sanic()
-CORS(app, automatic_options=True)
+#CORS(app, automatic_options=True)
 
 # print requests
 @app.middleware('request')
@@ -22,7 +22,7 @@ async def setup_db(app, loop):
 
 @app.route("/echo")
 async def echo(request):
-    return json({"recieved": True, "data": request.json})
+    return response.json({"recieved": True, "data": request.json})
 
 @app.route("/add_notes", methods=["POST"])
 async def add_notes(request):
@@ -42,15 +42,15 @@ async def add_notes(request):
 
 @app.route("/delete_notes")
 async def delete_notes(request):
-    return json({"route": "unimplemented"})
+    return response.json({"route": "unimplemented"})
 
 @app.route("/get_cards")
 async def get_cards(request):
-    return json({"route": "unimplemented"})
+    return response.json({"route": "unimplemented"})
 
 @app.route("/review_cards")
 async def update_cards(request):
-    return json({"route": "unimplemented"})
+    return response.json({"route": "unimplemented"})
 
 if __name__ == "__main__":
-    app.run(host="127.0.0.1", port=8000)
+    app.run(host="0.0.0.0", port=8000)
