@@ -1,6 +1,9 @@
 SRS for Devs
 
-#### Running individual services with docker locally
+#### Running mongo with docker locally
+`docker run --name mongodb mongo:4.0.4`
+
+#### Running our custom services with docker locally
 
 build the container:
 `docker build --rm -t <container_tag> .`
