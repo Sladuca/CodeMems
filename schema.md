@@ -22,7 +22,7 @@ Eventually support more types, in addition to adding custom types.
     * i.e. `{1: "console.log('Hello World')"}`
   * IF `CARD`:
     * Obj fields: maps field names to field contents
-    * Obj cards: maps front:back field names for each card
+  * list cards: maps front:back field names for each card
 
 
 Example function signature `CARD` type note:
@@ -34,22 +34,26 @@ Example function signature `CARD` type note:
     fields: {
       "API Function": "numpy.zeros function signature",
       "Parameters": "shape, dtype (optional), order (optional)",
-      "Return-value": "ndarray with all zeros"
+      "Return value": "ndarray with all zeros"
     },
-    cards: {
-    ["API Function", "Parameters"],
-    ["API Function", "Return-value"]
-    }
+    // cards get embedded in the notes that define them
+    cards: [
+      ...
+    ]
   }
 }]
 ```
 Example usage `CLOZE` type note
 ```
 [{
-  id: 2,
+  id: 1,
   note_type: "CLOZE",
   data: {
     text: "Generate a 2x1 numpy i32 array filled with zeros:\n {{1}}",
+    // cards get embedded in the notes that define them
+    cards: [
+      ...
+    ],
     cloze: {
       1: res = np.zeros((2, 1))
     }
@@ -59,37 +63,60 @@ Example usage `CLOZE` type note
 
 ### Card ###
 
-Data structure for storing a specific review item and it's scheduling information. Corresponds to 1 Note.
+Data structure for storing a specific review item and its scheduling information. Corresponds to 1 Note.
 
-* int id
-* int note-id
+* int no: cloze deletion number if associated note is `CLOZE` type, arbitrary otherwise (used as identifier with parent note)
 * Obj scheduling-info: see below
-* int no: cloze deletion number if associated note is `CLOZE` type, `null` otherwise
-* String front:
-  * IF associated `note` is type `CLOZE`, same as `note.data.text`, but with cloze insertion replaced with '[...]'
-  * IF associated `note` is type `CARD`, key of an entry in `note.data.cards` with the field name of the answer appended afterwards in parenthesis
-* String back:
-  * IF associated `note` is type `CLOZE`, same as `note.data.text`, but with cloze insertion made with
-  * IF associated `note` is type `CARD`, value of an entry in `note.data.cards`
+* String prompt:
+  * IF associated `note` is type `CLOZE`, same as `note.data.text`, but with cloze insertion replaced with
+  ```// answer here```
+  * IF associated `note` is type `CARD`, arbitrary text entered by user with the key of at least one entry in `note.data` in handlebars (`{{}}`).
+* String answer (only exists IF associated `note` is type `CARD`):
+  * same as prompt, but for the answer
 
-Example function signature card from above `CARD` type example:
+Example function signature cards from above `CLOZE` type example:
 ```
-[{
-  id: 1
-  scheduling-info: {...},
-  no: null,
-  front: "numpy.zeros (Parameters)",
-  back: "shape, dtype (optional), order (optional)"
-}]
+[
+  {
+    id: 0,
+    scheduling_info: {...},
+    prompt: "Generate a 2x1 numpy i32 array filled with zeros:\n// answer here",
+  },
+]
+```
+
+Example function signature cards from above `CARD` type example:
+```
+[
+  {
+    id: 0,
+    scheduling_info: {...},
+    prompt: "Parameters of {{API Function}}",
+    answer: "{{Parameters}}",
+  },
+  {
+    id: 1,
+    scheduling_info: {...},
+    prompt: "Retval of {{API Function}}",
+    answer: "{{Return value}}",
+  },
+  {
+    id: 2,
+    scheduling_info: {...},
+    prompt: "what numpy function takes {{Parameters}} as parameters and returns {{Return Value}}?"
+    answer: "{{API Function}}"
+  }
+]
 ```
 
 ### Scheduling Info ###
-object containing scheduling info. For now, just date for next review.
+object containing scheduling info. For now, just date for next review and the number of the bin for Leitner system.
 
 example:
 ```
 {
-  next-review: 2020-01-01T00:00:00.000Z
+  next-review: 2020-01-01T00:00:00.000Z,
+  bin: 0
 }
 ```
 
