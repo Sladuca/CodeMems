@@ -14,6 +14,7 @@ several flashcards (`NoteType: CARD`) or
 Eventually support more types, in addition to adding custom types.
 
 * int id: the note's id
+* int owner: id of the owner's account
 * String note-type: the note's type. Can be 'CLOZE' xor 'CARD'
 * Obj data:
   * IF `CLOZE`:
@@ -29,6 +30,7 @@ Example function signature `CARD` type note:
 ```
 [{
   id: 1,
+  owner: 0
   note_type: "CARD",
   data: {
     fields: {
@@ -47,6 +49,7 @@ Example usage `CLOZE` type note
 ```
 [{
   id: 1,
+  owner: 0,
   note_type: "CLOZE",
   data: {
     text: "Generate a 2x1 numpy i32 array filled with zeros:\n {{1}}",
