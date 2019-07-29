@@ -6,7 +6,7 @@ spec:
   ports:
     # port accessible within cluster
     - port: 80
-    # port to open in pod
+    # port to forward to pod
       targetPort: 8000 
   selector:
     app: notes-api
@@ -26,7 +26,7 @@ spec:
         app: notes-api
     spec:
       containers:
-        - name: echo1
+        - name: notes-api
           image: sladuca/codemems:notes-api
           ports: 
             - containerPort: 8000
