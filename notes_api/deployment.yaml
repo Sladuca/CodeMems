@@ -11,8 +11,20 @@ spec:
   selector:
     app: notes-api
 ---
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#  name: notes-pvc
+# spec:
+#  accessModes:
+#    - ReadWriteOnce
+#  resources:
+#    requests:
+#      storage: 5Gi
+#  storageClassName: do-block-storage
+#---
 apiVersion: apps/v1
-kind: deployment
+kind: StatefulSet
 metadata:
   name: notes-api
 spec:
@@ -33,5 +45,9 @@ spec:
         - name: notesapi-mongo
           image: mongo:4.1.13
           ports:
-            -containerPort: 27017
+            - containerPort: 27017
+        # volumes:
+        # - name: notes-api-volume
+        # persistentVolumeClaim:
+        # claimName: notes-pvc
 
