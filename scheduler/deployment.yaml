@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: service
+metadata:
+  name: scheduler
+spec:
+  ports:
+    # port accessible within cluster
+    - port: 80
+    # port to forward to pod
+      targetPort: 8000
+  selector:
+    app: scheduler
+---
+apiVersion: apps/v1
+kind: deployment
+metadata:
+  name: scheduler
+spec:
+  selector:
+    matchLabels:
+      api: scheduler
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: scheduler
+    spec:
+      containers:
+        - name: scheduler
+          image: sladuca/codemems:scheduler
+          ports:
+            - containerPort: 8000

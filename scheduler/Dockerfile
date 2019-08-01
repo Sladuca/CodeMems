@@ -1,5 +1,5 @@
 FROM python
 COPY . /api
-RUN pip install sanic pymongo motor sanic_cors
+RUN pip install sanic aiohttp
 EXPOSE 8000
-CMD python /scheduler/main.py
+CMD python /api/main.py
