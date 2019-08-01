@@ -1,64 +1,28 @@
 <template>
-  <!-- <div class="sample">
-    <h1>Example use of @carbon/vue</h1>
-    <cv-text-input label="Who are you?" v-model="yourName" placeholder="your name" />
-    <cv-button @click="onClick">Hello {{yourName}}</cv-button>
-    <cv-modal :visible="visible" @modal-hidden="modalClosed">
-      <template slot="title"
-        >Welcome to @carbon/vue {{yourName}}</template
-      >
-      <template slot="content">
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, seed do eiusmod tempor incididunt ut labore et
-          dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-          commodo consequat.
-        </p>
-      </template>
-    </cv-modal>
-  </div> -->
   <div id="app">
-    <add-note/>
-    <all-cards/>
+    <img alt="Vue logo" src="./assets/logo.png">
+    <HelloWorld msg="Welcome to Your Vue.js App"/>
   </div>
 </template>
 
 <script>
-import AddNote from './components/AddNote.vue'
-import AllCards from './components/AllCards.vue'
-  export default {
-    name: 'HelloWorld',
-    data() {
-      return {
-        yourName: '',
-        visible: false,
-      };
-    },
-    methods: {
-      onClick() {
-        this.visible = true;
-      },
-      modalClosed() {
-        this.visible = false;
-      },
-    },
-    components: {
-      "add-note": AddNote,
-      "all-cards": AllCards,
-    },
-  };
+import HelloWorld from './components/HelloWorld.vue'
+
+export default {
+  name: 'app',
+  components: {
+    HelloWorld
+  }
+}
 </script>
 
 <style>
-  .sample {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    max-width: 600px;
-    margin: 5% auto;
-  }
-
-  .cv-text-input {
-    margin: 30px 0;
-  }
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
 </style>
