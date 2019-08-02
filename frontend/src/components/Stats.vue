@@ -14,12 +14,12 @@
               icon
               large
               target="_blank"
-              v-on="gotoStats()"
+              v-on="gotoWelcome()"
             >
-              <v-icon large>fa-chart-line</v-icon>
+              <v-icon large>fa-sticky-note</v-icon>
             </v-btn>
           </template>
-          <span>Stats</span>
+          <span>Notes</span>
         </v-tooltip>
       </v-flex>
     </v-layout>
@@ -29,7 +29,7 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 export default {
-  name: "Welcome",
+  name: "Stats",
   methods: {
     ...mapActions([
       "changeView"
@@ -37,8 +37,8 @@ export default {
     ...mapGetters([
       "currentView"
     ]),
-    gotoStats () {
-      this.changeView("stats")
+    gotoWelcome () {
+      this.changeView("welcome")
     }
   }
 }
