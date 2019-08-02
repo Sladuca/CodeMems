@@ -1,5 +1,6 @@
 <template>
   <v-app id="inspire">
+    <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
     <v-navigation-drawer
       v-model="drawer"
       app
@@ -34,6 +35,8 @@
     </v-app-bar>
 
     <v-content>
+      <!-- <Stats v-if="currentView === 'stats'"></Stats>
+      <Welcome v-else></Welcome> -->
       <Welcome/>
     </v-content>
 
@@ -45,9 +48,17 @@
 
 <script>
   import Welcome from "./components/Welcome"
+  import Stats from "./components/Stats"
+  import { mapGetters } from "vuex"
   export default {
     components: {
       Welcome,
+      Stats,
+    },
+    computed: {
+      ...mapGetters([
+        "currentView"
+      ])
     },
     data: () => ({
       drawer: null,
