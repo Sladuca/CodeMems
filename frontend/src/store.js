@@ -4,13 +4,31 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  state: {
-
+  modules: {
+    view: viewModule,
+    decks: decksModule,
+    cards: cardsModule,
+    profile: profileModule,
+    stats: statsModule
   },
-  mutations: {
-
-  },
-  actions: {
-
-  }
 })
+
+const viewModule = {
+
+}
+
+const decksModule = {
+
+}
+
+const cardsModule = {
+
+}
+
+const profileModule = {
+
+}
+
+const statsModule = {
+
+}
