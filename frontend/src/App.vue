@@ -1,7 +1,30 @@
 <template>
   <v-app v-if="currentView !== undefined" :currentView="currentView" id="inspire">
     <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
-    <AppDrawer/>
+    <v-navigation-drawer
+      v-model="drawer"
+      app
+      clipped
+    >
+      <v-list dense>
+        <v-list-item @click="">
+          <v-list-item-action>
+            <v-icon>dashboard</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Dashboard</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item @click="">
+          <v-list-item-action>
+            <v-icon>settings</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Settings</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
     <v-app-bar
       app
       clipped-left
@@ -24,14 +47,15 @@
 <script>
   import Welcome from "./components/Welcome"
   import Stats from "./components/Stats"
-  import AppDrawer from "./components/AppDrawer"
   import { mapGetters } from "vuex"
   export default {
     components: {
       Welcome,
       Stats,
-      AppDrawer,
     },
+    data: () => ({
+      drawer: null,
+    }),
     computed: {
       ...mapGetters([
         "currentView"
