@@ -1,5 +1,5 @@
 <template>
-  <v-app v-bind:currentView="currentView" id="inspire">
+  <v-app v-if="currentView !== undefined" :currentView="currentView" id="inspire">
     <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
     <AppDrawer/>
     <v-app-bar
@@ -10,10 +10,9 @@
       <v-toolbar-title>Application</v-toolbar-title>
     </v-app-bar>
 
-    <v-content v-bind:currentView="currentView">
-      <!-- <Stats v-if="currentView === 'stats'"></Stats>
-      <Welcome v-else></Welcome> -->
-      <Welcome/>
+    <v-content :currentView="currentView">
+      <Welcome v-show="currentView === 'welcome'"></Welcome>
+      <Stats v-show="currentView === 'stats'"></Stats>
     </v-content>
 
     <v-footer app>
@@ -38,9 +37,6 @@
         "currentView"
       ])
     },
-    data: () => ({
-      drawer: null,
-    }),
     created () {
       this.$vuetify.theme.dark = true
     },

@@ -14,7 +14,7 @@
               icon
               large
               target="_blank"
-              v-on="gotoWelcome()"
+              @click="gotoWelcome()"
             >
               <v-icon large>fa-sticky-note</v-icon>
             </v-btn>

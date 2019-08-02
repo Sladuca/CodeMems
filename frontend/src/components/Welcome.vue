@@ -14,7 +14,7 @@
               icon
               large
               target="_blank"
-              v-on="gotoStats()"
+              @click="gotoStats()"
             >
               <v-icon large>fa-chart-line</v-icon>
             </v-btn>
