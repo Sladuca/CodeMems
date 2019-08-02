@@ -1,28 +1,58 @@
 <template>
   <v-app v-if="currentView !== undefined" :currentView="currentView" id="inspire">
     <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet">
     <v-navigation-drawer
       v-model="drawer"
       app
       clipped
     >
-      <v-list dense>
+      <v-list  dense>
         <v-list-item @click="">
           <v-list-item-action>
-            <v-icon>dashboard</v-icon>
+            <v-icon>fa-check</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title>Dashboard</v-list-item-title>
+            <v-list-item-title>Review</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
         <v-list-item @click="">
           <v-list-item-action>
-            <v-icon>settings</v-icon>
+            <v-icon>note_add</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title>Settings</v-list-item-title>
+            <v-list-item-title>Add notes</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
+        <v-list-group
+          prepend-icon="layers"
+          value="false"
+        >
+          <template v-slot:activator>
+            <v-list-item-title>Decks</v-list-item-title>
+          </template>
+          <v-list-item @click="">
+            <v-list-item-action>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>Vue.js</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+          <v-list-item @click="">
+            <v-list-item-action>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>PyTorch</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+          <v-list-item @click="">
+            <v-list-item-action>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>Rust</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list-group>
       </v-list>
     </v-navigation-drawer>
     <v-app-bar
