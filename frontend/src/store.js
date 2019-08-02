@@ -14,7 +14,11 @@ export default new Vuex.Store({
 })
 
 const viewModule = {
-
+  state: {
+    loading: false,
+    current_view: "Welcome",
+    drawer_open: false,
+  }
 }
 
 const decksModule = {
