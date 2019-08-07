@@ -16,19 +16,16 @@ async def print_request(request):
 async def setup_db(app, loop):
     app.mongoClient = motor.motor_asyncio.AsyncIOMotorClient('localhost', 27017,
         io_loop=loop)
-    app.codeMems = app.mongoClient['codeMems']
-    app.Notes = app.codeMems['Notes']
-    app.Cards = app.codeMems['Cards']
+    app.codeMems = app.mongoClient['codeMemsNotes']
+    app.Decks = app.codeMems['decks']
+    app.Notes = app.codeMems['notes']
+    app.Cards = app.codeMems['cards']
 
-@app.route("/echo")
-async def echo(request):
-    return response.json({"recieved": True, "data": request.json})
 
 @app.route("/add_notes", methods=["POST"])
 async def add_notes(request):
     data = request.json
     requests = []
-    rejected = 0
     for document in data:
         # aggregate bulk add replace upsert; identical documents get overwritten
         requests.append(ReplaceOne(document, document, upsert=True))
@@ -46,10 +43,6 @@ async def delete_notes(request):
 
 @app.route("/get_cards")
 async def get_cards(request):
-    return response.json({"route": "unimplemented"})
-
-@app.route("/review_cards")
-async def update_cards(request):
     return response.json({"route": "unimplemented"})
 
 if __name__ == "__main__":
