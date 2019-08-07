@@ -4,26 +4,37 @@ This file contains documentation for data formats for JSON and the database
 
 ## JSON Data ##
 
-Data to formats to be sent to/from client applications to backend via HTTP requests. In requests, ALL data must be enclosed in a singleton list, and empty lists are invalid.
+Data to formats to be sent to/from client applications to backend via HTTP requests. In requests, ALL data must be enclosed in a singleton list, and empty lists are invalid. Protocol buffers may actually be incredibly useful when sending / receiving data between services, especially since we 
+
+At the moment, there are 4 major data structures. Conceptually, they are:
+
+
+* Note
+  * A Note is a unit of information that a user wants to remember.
+  * For example, a Note may represent a function signature, containing a function’s parameters, return value, and behavior.
+* Card
+  * A card is an atomic piece of information associated with a Note, most of the time manifesting as a flashcard-like thing. Each Note corresponds to possible multiple cards, depending on what the user wishes to remember.
+  * Going with the function signature example, a user may have a card that asks what the function returns, and a card that asks what parameters it takes
+* Deck
+  * A deck is a collection of notes, with the intended purpose of holding all of the notes on a particular topic.
+  * Still following the same example, the function signature could be in a deck containing notes on a particular library / framework, for instance.
+* Review
+  * A review is a unit of data that characterizes a specific review of a specific card.
+  * This is to serve as training data for an ML model that attempts to optimize the time for users to review their cards.
+
+
 
 ### Note ###
 
-Data structure for storing a unit of information to memorize. Can translate to
-several flashcards (`NoteType: CARD`) or
-[cloze-deletions](https://en.wikipedia.org/wiki/Cloze_test) (`NoteType: CLOZE`). Corresponds to at least one Card.
-Eventually support more types, in addition to adding custom types.
+Data structure for storing a unit of information to memorize. Corresponds to at least one Card.
+Right now, provide
 
-* int id: the note's id
-* int owner: id of the owner's account
-* String note-type: the note's type. Can be 'CLOZE' xor 'CARD'
-* Obj data:
-  * IF `CLOZE`:
-    * String text: card text with cloze-item notation, i.e. "console.log({{1}})"
-    * Obj cloze: map cloze fields number and its contents
-    * i.e. `{1: "console.log('Hello World')"}`
-  * IF `CARD`:
-    * Obj fields: maps field names to field contents
-  * list cards: maps front:back field names for each card
+* `int id`: the note's id
+* `int owner`: id of the owner's account
+* `String note_type`: the note's type. Right now, only `card`
+* `Obj data`:
+  * `Obj fields`: maps field names to field contents
+  * `list cards`: contains `(front, back)` ordered pairs, representing the content on a card, where `front` and `back` are entries in `fields`
 
 
 Example function signature `CARD` type note:
@@ -42,24 +53,6 @@ Example function signature `CARD` type note:
     cards: [
       ...
     ]
-  }
-}]
-```
-Example usage `CLOZE` type note
-```
-[{
-  id: 1,
-  owner: 0,
-  note_type: "CLOZE",
-  data: {
-    text: "Generate a 2x1 numpy i32 array filled with zeros:\n {{1}}",
-    // cards get embedded in the notes that define them
-    cards: [
-      ...
-    ],
-    cloze: {
-      1: res = np.zeros((2, 1))
-    }
   }
 }]
 ```
