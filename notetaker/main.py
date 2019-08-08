@@ -41,8 +41,8 @@ async def add_notes(request):
 async def delete_notes(request):
     return response.json({"route": "unimplemented"})
 
-@app.route("/get_cards")
-async def get_cards(request):
+@app.route("/add_cards")
+async def add_cards(request):
     return response.json({"route": "unimplemented"})
 
 if __name__ == "__main__":
