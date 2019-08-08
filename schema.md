@@ -1,10 +1,10 @@
-# Data structures #
+# Data structures
 
 This file contains documentation for data formats for JSON and the database
 
-## JSON Data ##
+## JSON Data 
 
-Data to formats to be sent to/from client applications to backend via HTTP requests. In requests, ALL data must be enclosed in a singleton list, and empty lists are invalid. Protocol buffers may actually be incredibly useful when sending / receiving data between services, especially since we 
+Data to formats to be sent to/from client applications to backend via HTTP requests. In requests, ALL data must be enclosed in a singleton list, and empty lists are invalid. Protocol buffers may actually be incredibly useful when sending / receiving data between services, especially since we have so many services. In fact, that's probably what we should do. 
 
 At the moment, there are 4 major data structures. Conceptually, they are:
 
@@ -24,24 +24,25 @@ At the moment, there are 4 major data structures. Conceptually, they are:
 
 
 
-### Note ###
+### Note
 
 Data structure for storing a unit of information to memorize. Corresponds to at least one Card.
 Right now, provide
 
-* `int id`: the note's id
-* `int owner`: id of the owner's account
+* `id _id`: the note's id
+* `id owner`: id of the owner's account
+* `id deck`: id of the deck this note belongs to
 * `String note_type`: the note's type. Right now, only `card`
 * `Obj data`:
   * `Obj fields`: maps field names to field contents
   * `list cards`: contains `(front, back)` ordered pairs, representing the content on a card, where `front` and `back` are entries in `fields`
 
-
 Example function signature `CARD` type note:
 ```
 [{
   id: 1,
-  owner: 0
+  owner: 0,
+  deck: 0,
   note_type: "CARD",
   data: {
     fields: {
@@ -49,73 +50,69 @@ Example function signature `CARD` type note:
       "Parameters": "shape, dtype (optional), order (optional)",
       "Return value": "ndarray with all zeros"
     },
-    // cards get embedded in the notes that define them
     cards: [
-      ...
-    ]
-  }
+      ("API Function", "Parameters"),
+      ("API Function": "Return Value"),
+    ],
+  },
 }]
 ```
 
-### Card ###
+### Card
 
 Data structure for storing a specific review item and its scheduling information. Corresponds to 1 Note.
 
-* int no: cloze deletion number if associated note is `CLOZE` type, arbitrary otherwise (used as identifier with parent note)
-* Obj scheduling-info: see below
-* String prompt:
-  * IF associated `note` is type `CLOZE`, same as `note.data.text`, but with cloze insertion replaced with
-  ```// answer here```
-  * IF associated `note` is type `CARD`, arbitrary text entered by user with the key of at least one entry in `note.data` in handlebars (`{{}}`).
-* String answer (only exists IF associated `note` is type `CARD`):
-  * same as prompt, but for the answer
+* `id _id`: id of the card
+* `id owner`: id of the user who owns the card
+* `id note`: id of the note this card corresponds to
+* `id deck`: id of the deck this card belongs to
+* `Date due`: date the card is due for review
+* `Obj scheduling_info`: see below
+* `String front`: html appearance of the front of the card
+* `String back`: html appearance of the back of the card
 
-Example function signature cards from above `CLOZE` type example:
+Example:
 ```
-[
-  {
-    id: 0,
-    scheduling_info: {...},
-    prompt: "Generate a 2x1 numpy i32 array filled with zeros:\n// answer here",
-  },
-]
-```
-
-Example function signature cards from above `CARD` type example:
-```
-[
-  {
-    id: 0,
-    scheduling_info: {...},
-    prompt: "Parameters of {{API Function}}",
-    answer: "{{Parameters}}",
-  },
-  {
+[{
     id: 1,
-    scheduling_info: {...},
-    prompt: "Retval of {{API Function}}",
-    answer: "{{Return value}}",
-  },
-  {
-    id: 2,
-    scheduling_info: {...},
-    prompt: "what numpy function takes {{Parameters}} as parameters and returns {{Return Value}}?"
-    answer: "{{API Function}}"
-  }
-]
+    owner: 0,
+    note: 1,
+    deck: 0,
+    due: 2020-01-01T00:00:00.000Z
+    scheduling_info: {
+        // see below
+    },
+    front: "numpy.zeros function signature",
+    back: "ndarray with all zeros"
+}]
 ```
 
-### Scheduling Info ###
-object containing scheduling info. For now, just date for next review and the number of the bin for Leitner system.
+### Scheduling Info
+object containing scheduling info. For now, just the number of the bin for Leitner system.
 
 example:
 ```
 {
-  next-review: 2020-01-01T00:00:00.000Z,
   bin: 0
 }
 ```
 
+### Deck
+a collection of notes. Generally, this will by by topic.
+
+* `id _id`: id of the deck
+* `id owner`: id of the owner of the deck
+* `String name`: name of the deck
+
+Example:
+```
+[{
+    id: 0,
+    owner: 0,
+    name: "Numpy"
+}]
+```
+
 ## DB data
 
-We're using MongoDB, so it's exactly the same!
+We're using MongoDB, so it's exactly the same! (for now...)
