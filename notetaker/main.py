@@ -41,9 +41,5 @@ async def add_notes(request):
 async def delete_notes(request):
     return response.json({"route": "unimplemented"})
 
-@app.route("/add_cards")
-async def add_cards(request):
-    return response.json({"route": "unimplemented"})
-
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8000, Debug=True)
