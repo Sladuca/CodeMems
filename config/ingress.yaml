@@ -1,5 +1,0 @@
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: codemems-ingress
-  host: codemems.io
