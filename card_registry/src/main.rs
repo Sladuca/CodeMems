@@ -1,12 +1,11 @@
-use failure::Error
-use tokio
-use futures;
-use redis;
+use tokio;
+use failure::Error;
+use futures::future;
+use futures::future::{lazy, Future};
 use lapin_futures as lapin;
 use crate::lapin::{BasicProperties, Client, ConnectionProperties};
 use crate::lapin::options::{BasicPublishOptions, QueueDeclareOptions};
 use crate::lapin::types::FieldTable;
-use crate::futures::future::err;
 
 
 fn main() {
@@ -14,11 +13,15 @@ fn main() {
     // default to localhost if not provided
     let amqp_addr = std::env::var("AMQP_ADDR")
         .unwrap_or_else(|_| "amqp://127.0.0.1:5672/%2f".into());
-    // future that pubs to "hello"
-    let amqp_producer = Client::connect(&amqp_addr, ConnectionProperties::default())
-        // attempt to connect, return an Error if it has a bruh moment
-        .map_err(Error::from)
+    // future that pubs greeting to "hello"
+    let amqp_pub = Client::connect(&amqp_addr, ConnectionProperties::default())
+        // attempt to connect, print an Error if it has a bruh moment
+        .map_err(|_| println!("failed to connect to client"))
         // when the connect future resolves without bruh moment, set up a channel
+        .and_then(|client| {
+            client.create_channel()
+                .map_err(|_| println!("failed to create channel"))
+        })
         .and_then(|mut channel| {
             let id = channel.id();
             // set up the queue
@@ -32,19 +35,8 @@ fn main() {
                                       b"hello from the card registry".to_vec(),
                                       BasicPublishOptions::default(),
                                       BasicProperties::default())
-            }).map_err(Error::from)
+            })
+            .map_err(|_| println!("failed to declare the queue"))
         });
-    let amqp_consumer = Client::connect(&addr, ConnectionProperties::default())
-        .mapp_err(Error::from)
-        .and_then(|mut channel| {
-            let id = channel.id();
-            channel.queue_declare("hello", 
-                                  QueueDeclareOptions::default(),
-                                  FieldTable::default())
-            .and_then(|stream| {
-                stream.for_each(move |message| {
-                    // do stuff
-                })
-            }).map_err(Error:from)
-        });
+    tokio::run(amqp_pub);
 }
