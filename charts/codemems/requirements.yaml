@@ -1,0 +1,10 @@
+dependencies:
+  - name: redis
+    version: 8.0.18
+    repository: alias:stable
+  - name: mongodb
+    version: 7.1.1
+    repository: alias:stable 
+  - name: rabbitmq
+    version: 6.3.1
+    repository: alias:stable
