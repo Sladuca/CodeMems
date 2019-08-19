@@ -1,16 +1,1 @@
-SRS for Devs
-
-#### Running mongo with docker locally
-`docker run --name mongodb mongo:4.0.4`
-
-#### Running our custom services with docker locally
-
-build the container:
-`docker build --rm -t <container_tag> .`
-
-run the container and map ports:
-`docker run --rm -p 8000:8000 <container_tag> >`
-
-use `-d` if you want it to run in background
-
-the container should now be reachable on `localhost:8000`
+This project is currently in its infancy, and we are currently doing all of our documentation and planning in our [design document](https://docs.google.com/document/d/1a61hj1ghI48_sBaH0jCYPVq1Uzb8gjqE1IZY_6RrwOM/edit?usp=sharing). 
