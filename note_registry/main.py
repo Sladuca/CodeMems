@@ -54,7 +54,7 @@ async def setup_mongo(app, loop):
 @app.listener('before_server_start')
 async def setup_rabbit(app, loop):
     app.rabbit = await aio_pika.connect_robust(
-        'amqp://guest:guest@127.0.0.1/', loop=loop
+        'amqp://guest:guest@rabbit/', loop=loop
     )
     app.hellos = []
     app.add_task(produce_hello)
