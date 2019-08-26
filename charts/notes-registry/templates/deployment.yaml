@@ -1,0 +1,36 @@
+# exposes the pods that make up note registry as a service for other services
+# in the cluster to be able to access
+apiVerison: v1
+kind: Service
+metadata:
+  name: noteRegistryService
+spec:
+  type: NodePort
+  ports:
+    - port: {{ .Values.clusterPort }} # port accessible from within the cluster
+      name: noteRegistryService
+      target-port: {{ .Values.podPort }} # port accessible from within a pod
+      NodePort: {{ .Values.ExternaPort }} # port accessible from outside the cluster
+      protocol: TCP
+---
+# the note registry itself
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: noteRegistry
+spec:
+  containers:
+    # docker image to use
+    - name: note-registry
+      image: "{{ .Values.repository }}::{{ .Values.tag }}"
+      imagePullPolicy: {{ .Values.pullPolicy }}
+      ports:
+        - name: http
+          # port of the container to expose to incoming http
+          containerPort: 80
+          protocol: TCP
+        # environment variables to set within the container upon startup
+          env:
+            - name: RABBIT_HOSTNAME
+              value: "{{ .Release.Name }}-rabbitmq.default.svc.cluster.local"
+      
