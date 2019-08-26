@@ -1,8 +1,13 @@
+import os
+
 from sanic import Sanic, response
+
 import motor.motor_asyncio
 from pymongo import ReplaceOne
+
 import aio_pika
 from aio_pika import IncomingMessage
+
 #from sanic_cors import CORS, cross_origin
 
 app = Sanic()
@@ -45,7 +50,7 @@ async def setup_mongo(app, loop):
 @app.listener('before_server_start')
 async def setup_rabbit(app, loop):
     app.rabbit = await aio_pika.connect_robust(
-        'amqp://guest:guest@rabbit/', loop=loop
+        'amqp://guest:guest@{}/'.format(os.environ['RABBIT_HOSTNAME']), loop=loop
     )
     app.hellos = []
     app.add_task(consume_hello)
