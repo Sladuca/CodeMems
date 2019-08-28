@@ -5,5 +5,5 @@ repository: "sladuca/codemems"
 tag: "card-registry"
 
 clusterPort: 8000
-podPort: 80
+podPort: 8000
 NodePort: 30000
