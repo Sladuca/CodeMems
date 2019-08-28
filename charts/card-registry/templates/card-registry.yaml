@@ -20,17 +20,17 @@ metadata:
   name: cardRegistry
 spec:
   containers:
-    # docker image to use 
+    # docker container to use 
     - name: card-registry
       image: "{{ .Values.repository }}:{{ .Values.tag }}"
       imagePullPolicy: {{ .Values.pullPolicy }}
       ports:
         - name: http
           # port of the container to expose to incoming http
-          containerPort: 80
+          containerPort: {{ .Values.containerPort }}
           protocol: TCP
         # environment variables to set within the container upon startup
-        env:
-          - name: RABBIT_HOSTNAME
-            value: "{{ .Release.Name }}-rabbitmq.default.svc.cluster.local"
+      env:
+        - name: RABBIT_HOSTNAME
+          value: "{{ .Release.Name }}-{{ .Values.rabbitHost }}"
 
