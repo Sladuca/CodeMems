@@ -27,13 +27,18 @@ def recieve_hello(message: IncomingMessage):
 
 async def consume_hello(app):
     channel = await app.rabbit.channel()
+    # prefetch 1 message from the channel
     await channel.set_qos(prefetch_count=1)
     exchange = await channel.declare_exchange(
         'hello',
         aio_pika.ExchangeType.DIRECT
     )
+    # declare a new queue with a unique name exclusive to this client
     queue = await channel.declare_queue(exclusive=True)
+    # bind the queue to the exchage such that it recieves all messages sent
+    # to that exchange
     await queue.bind(exchange, routing_key='hello')
+    # attach a callback to event where we recieve a hello from the queue
     await queue.consume(recieve_hello)
 
 
@@ -49,15 +54,18 @@ async def setup_mongo(app, loop):
 
 @app.listener('before_server_start')
 async def setup_rabbit(app, loop):
+    # connection to rabbitMQ
+    # probably want to make one for each pub or sub
     app.rabbit = await aio_pika.connect_robust(
         'amqp://guest:guest@{}/'.format(os.environ['RABBIT_HOSTNAME']), loop=loop
     )
+    # list to hold of the hello's recieved
     app.hellos = []
     app.add_task(consume_hello)
 
 ##### main functionality #####
 
-@app.route('/hello')
+@app.route('/')
 async def show_hellos(request):
     return response.json(app.hellos)
 
