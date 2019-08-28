@@ -6,4 +6,7 @@ tag: "note-registry"
 
 clusterPort: 8000
 podPort: 8000
+containerPort: 8000
 NodePort: 30001
+
+rabbitHost: "rabbitmq.default.svc.cluster.local"
