@@ -2,8 +2,10 @@ replicaCount: 1
 pubbPolicy: IfNotPresent
 
 repository: "sladuca/codemems"
-tag: "card-registry"
+tag: "scheduler"
 
 clusterPort: 8000
 podPort: 8000
-NodePort: 30002
+NodePort: 30003
+
+rabbitHost: "rabbitmq.default.svc.cluster.local"
