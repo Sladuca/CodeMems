@@ -2,7 +2,7 @@ replicaCount: 1
 pullPolicy: IfNotPresent
 
 repository: "sladuca/codemems"
-tag: "note-registry"
+tag: "note_registry"
 
 clusterPort: 8000
 podPort: 8000
