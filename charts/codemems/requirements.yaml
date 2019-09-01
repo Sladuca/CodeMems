@@ -2,3 +2,24 @@ dependencies:
   - name: nginx-ingress:
     repository: "stable"
     version: 1.17.1
+  - name: rabbitmq:
+    repository: "stable"
+    version: 6.4.2
+  - name: mongodb:
+    repository: "stable"
+    verison: 7.2.4
+  - name: card-registry
+    repository: "http://localhost:8879"
+    version: 0.1.0
+  - name: note-registry
+    repository: "http://localhost:8879"
+    version: 0.1.0
+  - name: data_pipeline
+    repository: "http://localhost:8879"
+    version: 0.0.1
+  - name: scheduler
+    repository: "http://localhost:8879"
+    version: 0.0.1
+  - name: frontend
+    repository: "http://localhost:8879"
+    version: 0.0.1
