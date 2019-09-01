@@ -1,6 +1,10 @@
 replicaCount: 1
 pullPolicy: IfNotPresent
 
+serviceName: "card-registry-service"
+deploymentName: "card-registry"
+env: "dev"
+
 repository: "sladuca/codemems"
 tag: "card_registry"
 
