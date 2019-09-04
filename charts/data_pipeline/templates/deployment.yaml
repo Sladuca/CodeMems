@@ -1,23 +1,8 @@
-# expose the pods that make up data pipeline as a service for other services
-# in the cluster to be able to access
-apiVersion: v1
-kind: Service
-metadata:
-  name: dataPipeineService
-spec:
-  type: NodePort
-  ports:
-    - port: {{ .Values.clusterPort }} # port accessible from within the cluster
-      name: dataPipelineService
-      target-port: {{ .Values.ExternalPort }} # port accessible from within a pod
-      NodePort: {{ .Values.ExternalPort }} # port accessible from outside the cluster
-      protocol: TCP
----
 # the note registry itself
 apiVersion: extensions/v1beta1
-kind: Deployment
+kind: {{ .Values.deployment.name }}
 metadata:
-  name: dataPipeline
+  name: {{ .Values.deployment.name }}
 spec: 
   containers:
     # docker container to use
@@ -33,3 +18,7 @@ spec:
       env:
         - name: RABBIT_HOSTNAME
           value: "{{ .Release.Name }}-{{ .Values.rabbitHost }}"
+        - name: MONGO_HOST
+          value: {{ .Values.mongo.ip }}
+        - name: MONGO_PORT
+          value: {{ .Values.mongo.port }}

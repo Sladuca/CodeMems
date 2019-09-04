@@ -1,0 +1,15 @@
+# expose the pods that make up data pipeline as a service for other services
+# in the cluster to be able to access
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.service.name }}
+spec:
+  type: NodePort
+  ports:
+    - port: {{ .Values.clusterPort }} # port accessible from within the cluster
+      name: {{ .Values.service.name }}
+      target-port: {{ .Values.ExternalPort }} # port accessible from within a pod
+      NodePort: {{ .Values.ExternalPort }} # port accessible from outside the cluster
+      protocol: TCP
+
