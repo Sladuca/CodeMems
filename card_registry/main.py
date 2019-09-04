@@ -47,9 +47,9 @@ async def consume_hello(app):
 @app.listener('before_server_start')
 async def setup_mongo(app, loop):
     # set up database connections
-    #app.mongoClient = motor.motor_asyncio.AsyncIOMotorClient(os.env['MONGO_HOST'], os.env['MONGO_PORT'],
+    app.mongoClient = motor.motor_asyncio.AsyncIOMotorClient(os.env['MONGO_HOST'], os.env['MONGO_PORT'],
         #io_loop=loop)
-    app.mongoClient = motor.motor_asyncio.AsyncIOMotorClient('localhost', 27017,
+    #app.mongoClient = motor.motor_asyncio.AsyncIOMotorClient('localhost', 27017,
                                                              io_loop=loop)
     app.mongo = app.mongoClient['CardRegistry']
     app.cards = app.mongo['cards']
