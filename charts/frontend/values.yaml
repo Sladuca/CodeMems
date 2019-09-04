@@ -1,11 +1,15 @@
-replicaCount: 1
-pubbPolicy: IfNotPresent
+deployment:
+  replicaCount: 1
+  purllPolicy: IfNotPresent
+  repository: "sladuca/codemems"
+  tag: "scheduler"
+  name: "scheduler"
 
-repository: "sladuca/codemems"
-tag: "scheduler"
+service:
+  clusterPort: 8000
+  podPort: 8000
+  NodePort: 30003
+  name: "scheduler-service"
 
-clusterPort: 8000
-podPort: 8000
-NodePort: 30003
-
-rabbitHost: "rabbitmq.default.svc.cluster.local"
+rabbit:
+  host: "rabbitmq.default.svc.cluster.local"
