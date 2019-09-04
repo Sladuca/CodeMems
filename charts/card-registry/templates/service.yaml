@@ -3,20 +3,20 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Values.serviceName }}
+  name: {{ .Values.service.name }}
   labels:
     app: "codemems"
-    component: {{ .Values.serviceName }}
-    environment: {{ .Values.env }}
+    component: {{ .Values.service.name }}
+    environment: {{ .Values.deployment.env }}
 spec:
   type: NodePort
   ports:
-    - port: {{ .Values.clusterPort }} # port accessible from within the cluster
-      name: {{ .Values.serviceName }}
-      target-port: {{ .Values.podPort }} # port accessible from within a pod
-      NodePort: {{ .Values.ExternalPort }} # port accessible from outside the cluster
+    - port: {{ .Values.service.clusterPort }} # port accessible from within the cluster
+      name: {{ .Values.service.name }}
+      target-port: {{ .Values.service.podPort }} # port accessible from within a pod
+      NodePort: {{ .Values.service.ExternalPort }} # port accessible from outside the cluster
       protocol: TCP
   selector:
     app: "codemems"
-    component: {{ .Values.serviceName }}
-    environment: {{ .Values.env }}
+    component: {{ .Values.service.name }}
+    environment: {{ .Values.deployment.env }}

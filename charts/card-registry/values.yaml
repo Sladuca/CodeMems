@@ -1,16 +1,21 @@
-replicaCount: 1
-pullPolicy: IfNotPresent
+deployment:
+  replicaCount: 1
+  pullPolicy: IfNotPresent
+  repository: "sladuca/codemems"
+  tag: "card_registry"
+  name: "card-registry"
+  env: "dev"
 
-serviceName: "card-registry-service"
-deploymentName: "card-registry"
-env: "dev"
+service:
+  clusterPort: 8000
+  podPort: 8000
+  containerPort: 8000
+  NodePort: 30000
+  name: "card-registry-service"
+  
+rabbit:
+  host: "rabbitmq.default.svc.cluster.local"
 
-repository: "sladuca/codemems"
-tag: "card_registry"
-
-clusterPort: 8000
-podPort: 8000
-containerPort: 8000
-NodePort: 30000
-
-rabbitHost: "rabbitmq.default.svc.cluster.local"
+mongo:
+  ip: nil
+  port: 27017

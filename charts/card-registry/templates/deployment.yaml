@@ -2,26 +2,28 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: {{ .Values.deploymentName }}
+  name: {{ .Values.deployment.name }}
 spec:
   replicas: 1
   template:
     metadata:
       labels:
         app: "codemems"
-        component: {{ .Values.deploymentName }}
+        component: {{ .Values.deployment.name }}
     spec:
       containers:
         # docker container to use 
         - name: card-registry
-          image: {{ .Values.repository }}:{{ .Values.tag }}
-          imagePullPolicy: {{ .Values.pullPolicy }}
+          image: {{ .Values.deployment.repository }}:{{ .Values.deplotment.tag }}
+          imagePullPolicy: {{ .Values.deployment.pullPolicy }}
           ports:
             - name: http
               # port of the container to expose to incoming http
-              containerPort: {{ .Values.containerPort }}
+              containerPort: {{ .Values.service.containerPort }}
               protocol: TCP
             # environment variables to set within the container upon startup
           env:
-            - name: RABBIT_HOSTNAME
-              value: {{ .Release.Name }}-{{ .Values.rabbitHost }}
+            - name: RABBIT_HOST
+              value: {{ .Release.Name }}-{{ .Values.rabbit.host }}
+            - name: MONGO_HOST
+              value: {{ .Values.mongo.ip }}
