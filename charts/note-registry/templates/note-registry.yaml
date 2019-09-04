@@ -1,36 +1,31 @@
-# exposes the pods that make up note registry as a service for other services
-# in the cluster to be able to access
-apiVerison: v1
-kind: Service
-metadata:
-  name: noteRegistryService
-spec:
-  type: NodePort
-  ports:
-    - port: {{ .Values.clusterPort }} # port accessible from within the cluster
-      name: noteRegistryService
-      target-port: {{ .Values.podPort }} # port accessible from within a pod
-      NodePort: {{ .Values.ExternaPort }} # port accessible from outside the cluster
-      protocol: TCP
----
-# the note registry itself
+# the jawn itself
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: noteRegistry
+  name: {{ .Values.deployment.name }}
 spec:
-  containers:
-    # docker image to use
-    - name: note-registry
-      image: "{{ .Values.repository }}::{{ .Values.tag }}"
-      imagePullPolicy: {{ .Values.pullPolicy }}
-      ports:
-        - name: http
-          # port of the container to expose to incoming http
-          containerPort: {{ .Values.containerPort }}
-          protocol: TCP
-        # environment variables to set within the container upon startup
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: "codemems"
+        component: {{ .Values.deployment.name }}
+    spec:
+      containers:
+        # docker container to use 
+        - name: {{ .Values.deployment.name }}
+          image: {{ .Values.deployment.repository }}:{{ .Values.deplotment.tag }}
+          imagePullPolicy: {{ .Values.deployment.pullPolicy }}
+          ports:
+            - name: http
+              # port of the container to expose to incoming http
+              containerPort: {{ .Values.service.containerPort }}
+              protocol: TCP
+            # environment variables to set within the container upon startup
           env:
-            - name: RABBIT_HOSTNAME
-              value: "{{ .Release.Name }}-{{ .Values.rabbitHost }}"
-      
+            - name: RABBIT_HOST
+              value: {{ .Release.Name }}-{{ .Values.rabbit.host }}
+            - name: MONGO_HOST
+              value: {{ .Values.mongo.ip }}
+            - name: MONGO_PORT
+              value: {{ .Values.mongo.port }}
