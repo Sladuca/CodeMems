@@ -1,28 +1,43 @@
 dependencies:
-  - name: nginx-ingress:
-    repository: "stable"
+  - name: nginx-ingress
+    repository: "@stable"
     version: 1.17.1
-  - name: rabbitmq:
-    repository: "stable"
+  - name: rabbitmq
+    repository: "@stable"
     version: 6.4.2
-  - name: mongodb:
-    repository: "stable"
-    verison: 7.2.4
+  - name: mongodb
+    repository: "@stable"
+    version: 7.2.7
     import-values:
       - child: service
         parent: mongoService
   - name: card-registry
-    repository: "http://localhost:8879"
+    repository: "@local"
     version: 0.1.0
+    import-values:
+      - child: service
+        parent: cardService
   - name: note-registry
-    repository: "http://localhost:8879"
+    repository: "@local" 
     version: 0.1.0
-  - name: data_pipeline
-    repository: "http://localhost:8879"
+    import-values:
+      - child: service
+        parent: noteService
+  - name: data-pipeline
+    repository: "@local"
     version: 0.0.1
+    import-values:
+      - child: service
+        parent: dataService
   - name: scheduler
-    repository: "http://localhost:8879"
+    repository: "@local"
     version: 0.0.1
+    import-values:
+      - child: service
+        parent: schedulerService
   - name: frontend
-    repository: "http://localhost:8879"
+    repository: "@local"
     version: 0.0.1
+    import-values:
+      - child: service
+        parent: frontendService
