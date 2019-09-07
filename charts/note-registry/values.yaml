@@ -1,0 +1,20 @@
+deployment:
+  replicaCount: 1
+  pullPolicy: IfNotPresent
+  repository: "sladuca/codemems"
+  tag: "note_registry"
+  name: "note-registry"
+
+service:
+  clusterPort: 8000
+  podPort: 8000
+  containerPort: 8000
+  NodePort: 30001
+  name: "note-registry-service"
+
+rabbit:
+  host: "rabbitmq.default.svc.cluster.local"
+
+mongo:
+  ip: nil
+  port: 27017

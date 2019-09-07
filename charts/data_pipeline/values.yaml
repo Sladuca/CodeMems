@@ -1,0 +1,18 @@
+deployment:
+  replicaCount: 1
+  pullPolicy: IfNotPresent
+  repository: "sladuca/codemems"
+  tag: "data_pipeline"
+
+service:
+  clusterPort: 8000
+  podPort: 8000
+  containerPort: 8000
+  NodePort: 30004
+
+rabbit:
+  host: "rabbitmq.default.svc.cluster.local"
+
+mongo:
+  ip: nil
+  port: 27017

@@ -1,0 +1,36 @@
+# expose the pods that make up the scheduler as a service to other services
+apiVersion: v1
+kind: Service
+metadata:
+  name: schedulerService
+spec:
+  type: NodePort
+  ports:
+    - port: {{ .Values.clusterPort }}
+      name: schedulerService
+      target-port: {{ .values.podPort }}
+      NodePort: {{ .Values.ExternalPort }}
+      protocol: TCP
+---
+# the scheduler deployment itself
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: scheduler
+spec: 
+  containers:
+    # docker container to use
+    - name: scheduler
+      image: "{{ .Values.repository }}:{{ .Values.tag }}"
+      imagePullPolicy: {{ .Values.pullPolicy }}
+      ports:
+        - name: http
+          # port of the container to expose to incoming http
+          containerPort: {{ .Values.containerPort }}
+          protocol: TCP
+        # environment variables to set within the container upon startup
+      env:
+        - name: RABBIT_HOSTNAME
+          value: "{{ .Release.Name }}-{{ .Values.rabbitHost }}"
+
+      

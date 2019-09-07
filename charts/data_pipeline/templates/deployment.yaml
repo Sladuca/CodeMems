@@ -1,0 +1,31 @@
+# the jawn itself
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ .Values.deployment.name }}
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: "codemems"
+        component: {{ .Values.deployment.name }}
+    spec:
+      containers:
+        # docker container to use 
+        - name: {{ .Values.deployment.name }}
+          image: {{ .Values.deployment.repository }}:{{ .Values.deplotment.tag }}
+          imagePullPolicy: {{ .Values.deployment.pullPolicy }}
+          ports:
+            - name: http
+              # port of the container to expose to incoming http
+              containerPort: {{ .Values.service.containerPort }}
+              protocol: TCP
+            # environment variables to set within the container upon startup
+          env:
+            - name: RABBIT_HOST
+              value: {{ .Release.Name }}-{{ .Values.rabbit.host }}
+            - name: MONGO_HOST
+              value: {{ .Values.mongo.ip }}
+            - name: MONGO_PORT
+              value: {{ .Values.mongo.port }}

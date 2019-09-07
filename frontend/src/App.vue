@@ -1,64 +1,98 @@
 <template>
-  <!-- <div class="sample">
-    <h1>Example use of @carbon/vue</h1>
-    <cv-text-input label="Who are you?" v-model="yourName" placeholder="your name" />
-    <cv-button @click="onClick">Hello {{yourName}}</cv-button>
-    <cv-modal :visible="visible" @modal-hidden="modalClosed">
-      <template slot="title"
-        >Welcome to @carbon/vue {{yourName}}</template
-      >
-      <template slot="content">
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, seed do eiusmod tempor incididunt ut labore et
-          dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-          commodo consequat.
-        </p>
-      </template>
-    </cv-modal>
-  </div> -->
-  <div id="app">
-    <add-note/>
-    <all-cards/>
-  </div>
+  <v-app v-if="currentView !== undefined" :currentView="currentView" id="inspire">
+    <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet">
+    <v-navigation-drawer
+      v-model="drawer"
+      app
+      clipped
+    >
+      <v-list  dense>
+        <v-list-item @click="">
+          <v-list-item-action>
+            <v-icon>fa-check</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Review</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item @click="">
+          <v-list-item-action>
+            <v-icon>note_add</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Add notes</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-group
+          prepend-icon="layers"
+          value="false"
+        >
+          <template v-slot:activator>
+            <v-list-item-title>Decks</v-list-item-title>
+          </template>
+          <v-list-item @click="">
+            <v-list-item-action>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>Vue.js</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+          <v-list-item @click="">
+            <v-list-item-action>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>PyTorch</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+          <v-list-item @click="">
+            <v-list-item-action>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>Rust</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list-group>
+      </v-list>
+    </v-navigation-drawer>
+    <v-app-bar
+      app
+      clipped-left
+    >
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-toolbar-title>Application</v-toolbar-title>
+    </v-app-bar>
+
+    <v-content :currentView="currentView">
+      <Welcome v-show="currentView === 'welcome'"></Welcome>
+      <Stats v-show="currentView === 'stats'"></Stats>
+    </v-content>
+
+    <v-footer app>
+      <span>&copy; 2019</span>
+    </v-footer>
+  </v-app>
 </template>
 
 <script>
-import AddNote from './components/AddNote.vue'
-import AllCards from './components/AllCards.vue'
+  import Welcome from "./components/Welcome"
+  import Stats from "./components/Stats"
+  import { mapGetters } from "vuex"
   export default {
-    name: 'HelloWorld',
-    data() {
-      return {
-        yourName: '',
-        visible: false,
-      };
-    },
-    methods: {
-      onClick() {
-        this.visible = true;
-      },
-      modalClosed() {
-        this.visible = false;
-      },
-    },
     components: {
-      "add-note": AddNote,
-      "all-cards": AllCards,
+      Welcome,
+      Stats,
     },
-  };
+    data: () => ({
+      drawer: null,
+    }),
+    computed: {
+      ...mapGetters([
+        "currentView"
+      ])
+    },
+    created () {
+      this.$vuetify.theme.dark = true
+    },
+  }
 </script>
-
-<style>
-  .sample {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    max-width: 600px;
-    margin: 5% auto;
-  }
-
-  .cv-text-input {
-    margin: 30px 0;
-  }
-</style>
