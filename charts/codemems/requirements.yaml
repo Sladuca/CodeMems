@@ -10,34 +10,34 @@ dependencies:
     version: 7.2.7
     import-values:
       - child: service
-        parent: mongoService
+        parent: mongo
   - name: card-registry
     repository: "@local"
     version: 0.1.0
     import-values:
       - child: service
-        parent: cardService
+        parent: card-registry
   - name: note-registry
     repository: "@local" 
     version: 0.1.0
     import-values:
       - child: service
-        parent: noteService
+        parent: note-registry
   - name: data-pipeline
     repository: "@local"
     version: 0.0.1
     import-values:
       - child: service
-        parent: dataService
+        parent: data-registry
   - name: scheduler
     repository: "@local"
     version: 0.0.1
     import-values:
       - child: service
-        parent: schedulerService
+        parent: scheduler
   - name: frontend
     repository: "@local"
     version: 0.0.1
     import-values:
       - child: service
-        parent: frontendService
+        parent: frontend
