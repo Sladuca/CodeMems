@@ -10,6 +10,3 @@ service:
   podPort: 8000
   NodePort: 30003
   name: "scheduler-service"
-
-rabbit:
-  host: "rabbitmq.default.svc.cluster.local"
