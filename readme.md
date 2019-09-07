@@ -1,4 +1,6 @@
-#SRS for Devs
+# SRS for Devs
+
+This project is currently in its infancy, and we are currently doing all of our documentation and planning in our [design document](https://docs.google.com/document/d/1a61hj1ghI48_sBaH0jCYPVq1Uzb8gjqE1IZY_6RrwOM/edit?usp=sharing).
 
 ## Getting Started
 
