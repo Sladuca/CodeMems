@@ -14,7 +14,7 @@ spec:
       containers:
         # docker container to use 
         - name: {{ .Values.deployment.name }}
-          image: {{ .Values.deployment.repository }}:{{ .Values.deplotment.tag }}
+          image: {{ .Values.deployment.repository }}:{{ .Values.deployment.tag }}
           imagePullPolicy: {{ .Values.deployment.pullPolicy }}
           ports:
             - name: http
@@ -24,8 +24,8 @@ spec:
             # environment variables to set within the container upon startup
           env:
             - name: RABBIT_HOST
-              value: {{ .Release.Name }}-{{ .Values.rabbit.host }}
+              value: "{{ .Release.Name }}-{{ .Values.rabbit.host }}"
             - name: MONGO_HOST
-              value: {{ .Values.mongo.ip }}
+              value: "{{ .Release.Name }}-{{ .Values.mongo.host }}"
             - name: MONGO_PORT
-              value: {{ .Values.mongo.port }}
+              value: "{{ .Values.mongo.port }}"

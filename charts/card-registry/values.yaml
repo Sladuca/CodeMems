@@ -17,5 +17,5 @@ rabbit:
   host: "rabbitmq.default.svc.cluster.local"
 
 mongo:
-  ip: nil
+  host: nil
   port: 27017
