@@ -24,8 +24,8 @@ spec:
             # environment variables to set within the container upon startup
           env:
             - name: RABBIT_HOST
-              value: {{ .Release.Name }}-{{ .Values.rabbit.host }}
+              value: "{{ .Release.Name }}-{{ .Values.rabbit.host }}"
             - name: MONGO_HOST
-              value: {{ .Values.mongo.host }}
+              value: "{{ .Values.mongo.host }}"
             - name: MONGO_PORT
-              value: {{ .Values.mongo.port }}
+              value: "{{ .Values.mongo.port }}"
