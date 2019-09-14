@@ -2,14 +2,33 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
+# ingress goes at 10.0.0.0
+# rabbit goes at 10.0.0.1
+# all database services go in 10.0.0.8/29
+# all other services go in 10.0.0.8/29
+
 replicaCount: 1
 pullPolicy: IfNotPresent
 
 card-registry:
-  repository: "sladuca/codemems"
-  tag: card-registry
+  rabbit:
+    host: "rabbitmq.default.svc.cluster.local"
+  mongo:
+    host: "mongodb-replicaset"
 
 note-registry:
-  repository: "sladuca/codemems"
-  tag: note-registry
-  
+  rabbit:
+    host: "rabbitmq.default.svc.cluster.local"
+  mongo:
+    host: "mongodb-replicaset"
+
+data-pipeline:
+  rabbit:
+    host: "rabbitmq.default.svc.cluster.local"
+  mongo:
+    host: "mongodb-replicaset"
+
+scheduler:
+  rabbit:
+    host: "rabbitmq.default.svc.cluster.local"
+
