@@ -3,27 +3,17 @@ entries:
   card-registry:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2019-09-14T16:36:52.761188882-04:00"
+    created: "2019-09-14T17:16:32.266975702-04:00"
     description: codemems card-registry
     digest: e5854e2c1f0dbe427ac7368fea3e24e456240aca9d54e1ad413bb1874223c09b
     name: card-registry
     urls:
     - card-registry-0.1.0.tgz
     version: 0.1.0
-  data_pipeline:
-  - apiVersion: v1
-    appVersion: "1.0"
-    created: "2019-09-14T16:36:52.761885293-04:00"
-    description: codemems card-regsitry
-    digest: 07abe4fa349e52579c7439885c8c2afc2e52ff492060602dbe2518eca90ad305
-    name: data_pipeline
-    urls:
-    - data_pipeline-0.1.0.tgz
-    version: 0.1.0
   frontend:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2019-09-14T16:36:52.762500332-04:00"
+    created: "2019-09-14T17:16:32.267550095-04:00"
     description: A Helm chart for Kubernetes
     digest: 18f7f7466c256b1f67bcbe5c2a4404eed4d4f4e2c2e0d0d80d9f49eef8a98ea2
     name: frontend
@@ -33,7 +23,7 @@ entries:
   note-registry:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2019-09-14T16:36:52.763065236-04:00"
+    created: "2019-09-14T17:16:32.268097938-04:00"
     description: A Helm chart for Kubernetes
     digest: 98e72610a61a356735af387dc9a26a3cb949254d4a41c373bf52da93f342d7d6
     name: note-registry
@@ -43,11 +33,11 @@ entries:
   scheduler:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2019-09-14T16:36:52.763533024-04:00"
+    created: "2019-09-14T17:16:32.268900711-04:00"
     description: codemems scheduler
     digest: f8c09e884e9b695c5ec4b6f0e58f1104ddb390283b3313a15853592c4f6dbce7
     name: scheduler
     urls:
     - scheduler-0.1.0.tgz
     version: 0.1.0
-generated: "2019-09-14T16:36:52.759978765-04:00"
+generated: "2019-09-14T17:16:32.265943794-04:00"
