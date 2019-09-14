@@ -5,18 +5,17 @@ dependencies:
   - name: rabbitmq
     repository: "@stable"
     version: 6.4.2
-  - name: mongodb
+  - name: mongodb-replicaset
     repository: "@stable"
-    version: 7.2.7
+    version: 3.9.6
     import-values:
-      - child: service
+      - child: serivce
         parent: mongo
   - name: card-registry
     repository: "@local"
     version: 0.1.0
     import-values:
-      - child: service
-        parent: card-registry
+      - card-registry
   - name: note-registry
     repository: "@local" 
     version: 0.1.0
@@ -28,7 +27,7 @@ dependencies:
     version: 0.0.1
     import-values:
       - child: service
-        parent: data-registry
+        parent: data-pipeline
   - name: scheduler
     repository: "@local"
     version: 0.0.1
