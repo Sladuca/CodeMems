@@ -26,5 +26,16 @@
 import { mapActions, mapGetters } from 'vuex'
 export default {
   name: "Decks",
+  methods: {
+    ...mapActions([
+      "addDeck",
+      "addNote",
+      "updateNote",
+    ]),
+    ...mapGetters([
+      "getDecks",
+      "getNotes",
+    ]),
+  }
 }
 </script>
