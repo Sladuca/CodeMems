@@ -28,23 +28,8 @@ const viewModule = {
 const decksModule = {
   state: {
     decks: [
-      {
-        "title": "NumPy",
-        "id": 101,
-        "userID": 1,
-      },
-      {
-        "title": "Rust",
-        "id": 102,
-        "userID": 1,
-      },
-      {
-        "title": "Vue.js",
-        "id": 103,
-        "userID": 1,
-      },
     ],
-    nDecks: 3,
+    nDecks: 0,
   },
   mutations: {
     setDecks: (state, decks) => (state.decks = decks) ,
@@ -63,7 +48,7 @@ const decksModule = {
     async updateNote(context, noteId) {},
     async getDecks(context) {
       const res = await axios.get(
-        "https://jsonplaceholder.typicode.com/albums"
+        "https://raw.githubusercontent.com/Sladuca/CodeMems/master/frontend/placeholder/decks.json" 
       )
     context.commit('setDecks', res.data)
     },
