@@ -22,6 +22,15 @@
               <v-btn text>
                 Review Now
               </v-btn>
+              <v-btn text>
+                Add Notes
+              </v-btn>
+              <v-btn text>
+                Import Deck
+              </v-btn>
+              <v-btn text>
+                Create Deck
+              </v-btn>
             </v-card-actions>
           </v-card>
           <!-- end message card -->
