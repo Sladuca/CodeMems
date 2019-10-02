@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import axios from 'axios'
 
 Vue.use(Vuex)
 
@@ -18,14 +19,55 @@ const viewModule = {
     },
   },
   actions: {
-    changeView (context, newView) {
+    changeView(context, newView) {
       context.commit('changeView', newView)
     },
   }
 }
 
 const decksModule = {
-
+  state: {
+    decks: [
+      {
+        "title": "NumPy",
+        "id": 101,
+        "userID": 1,
+      },
+      {
+        "title": "Rust",
+        "id": 102,
+        "userID": 1,
+      },
+      {
+        "title": "Vue.js",
+        "id": 103,
+        "userID": 1,
+      },
+    ],
+    nDecks: 3,
+  },
+  mutations: {
+    setDecks: (state, decks) => (state.decks = decks) ,
+  },
+  getters: {
+    allDecks: state => {
+      return state.decks
+    },
+    allNotes: state => {
+      return "unimplemented"
+    }
+  },
+  actions: {
+    async addDeck(context, newDeck) {},
+    async addNote(context, newNote) {},
+    async updateNote(context, noteId) {},
+    async getDecks(context) {
+      const res = await axios.get(
+        "https://jsonplaceholder.typicode.com/albums"
+      )
+    context.commit('setDecks', res.data)
+    },
+  },
 }
 
 const cardsModule = {
