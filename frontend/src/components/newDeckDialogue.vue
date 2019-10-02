@@ -58,3 +58,10 @@
     </v-dialog>
   </v-row>
 </template>
+
+<script>
+export default {
+  data: {
+    dialog: false,
+  }
+</script>
