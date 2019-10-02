@@ -11,7 +11,7 @@
       <v-badge
         :left=true
         >
-        <template v-slot:badge>{{ i }}</template>
+        <template v-slot:badge>{{ deck.numToReview }}</template>
         <span>{{ deck.title }}</span>
       </v-badge>
     </v-expansion-panel-header>
