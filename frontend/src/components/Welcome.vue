@@ -28,9 +28,7 @@
               <v-btn text>
                 Import Deck
               </v-btn>
-              <v-btn text>
-                Create Deck
-              </v-btn>
+              <newDeckDialog/>
             </v-card-actions>
           </v-card>
           <!-- end message card -->
@@ -45,6 +43,7 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import Decks from './Decks.vue'
+import newDeckDialog from './newDeckDialog.vue'
 export default {
   name: "Welcome",
   methods: {
@@ -59,7 +58,8 @@ export default {
     }
   },
   components: {
-    Decks
+    Decks,
+    newDeckDialog,
   }
 }
 </script>
