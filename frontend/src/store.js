@@ -33,6 +33,7 @@ const decksModule = {
   },
   mutations: {
     setDecks: (state, decks) => (state.decks = decks) ,
+    newDeck: (state, deck) => state.decks.unshift(deck),
   },
   getters: {
     allDecks: state => {
@@ -43,7 +44,15 @@ const decksModule = {
     }
   },
   actions: {
-    async addDeck(context, newDeck) {},
+    async addDeck(context, newDeck) {
+      /*const res = await axios.post(
+        "https://raw.githubusercontent.com/Sladuca/CodeMems/master/frontend/placeholder/decks.json", 
+        newDeck
+      )
+      context.commit('newDeck', res.data)
+      */
+      context.commit('newDeck', newDeck)
+    },
     async addNote(context, newNote) {},
     async updateNote(context, noteId) {},
     async getDecks(context) {
