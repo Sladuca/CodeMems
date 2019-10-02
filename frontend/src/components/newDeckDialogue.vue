@@ -2,7 +2,7 @@
   <v-row justify="center">
     <v-dialog v-model="dialog" persistent max-width="600px">
       <template v-slot:activator="{ on }">
-        <v-btn color="primary" dark v-on="on">Open Dialog</v-btn>
+        <v-btn color="primary" dark v-on="on">New Deck</v-btn>
       </template>
       <v-card>
         <v-card-title>
@@ -61,7 +61,9 @@
 
 <script>
 export default {
+  name: "newDeckDialog",
   data: {
     dialog: false,
   }
+}
 </script>
