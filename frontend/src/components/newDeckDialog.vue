@@ -11,25 +11,48 @@
           <v-container>
             <v-row>
               <v-col cols="12">
-                <v-text-field label="Deck Name*" required></v-text-field>
+                <v-text-field label="Deck Name" v-model="deckName" required></v-text-field>
               </v-col>
             </v-row>
           </v-container>
         </v-card-text>
         <v-card-actions>
           <div class="flex-grow-1"></div>
-          <v-btn text @click="dialog = false">Cancel</v-btn>
-          <v-btn text @click="dialog = false">Save</v-btn>
+          <v-btn text @click="closeDialog()">Cancel</v-btn>
+          <v-btn text @click="onSave()">Save</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
 </template>
 
 <script>
+import { mapActions } from "vuex"
 export default {
   name: "newDeckDialog",
-  data: () => ({
-    dialog: false
-  }),
+  data: () => {
+    return {
+      dialog: false,
+      deckName: "",
+    }
+  },
+  methods: {
+    ...mapActions([
+      "addDeck",
+    ]),
+    closeDialog() {
+      this.dialog = false
+    },
+    onSave(e) {
+      // hardcode these for now
+      const newDeck = {
+        "_id": Math.random() * (999999 - 1000) + 1000,
+        "userId": 0,
+        "title": this.deckName,
+        "numToReview": 0,
+      }
+      this.closeDialog()
+      this.addDeck(newDeck)
+    },
+  },
 }
 </script>
