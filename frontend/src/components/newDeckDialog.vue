@@ -60,8 +60,8 @@
 <script>
 export default {
   name: "newDeckDialog",
-  data: {
-    dialog: false,
-  }
+  data: () => ({
+    dialog: false
+  }),
 }
 </script>
