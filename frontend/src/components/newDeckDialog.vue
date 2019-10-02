@@ -1,8 +1,7 @@
 <template>
-  <v-row justify="center">
     <v-dialog v-model="dialog" persistent max-width="600px">
       <template v-slot:activator="{ on }">
-        <v-btn color="primary" dark v-on="on">New Deck</v-btn>
+        <v-btn text v-on="on">New Deck</v-btn>
       </template>
       <v-card>
         <v-card-title>
@@ -33,14 +32,14 @@
               </v-col>
               <v-col cols="12" sm="6">
                 <v-select
-                  :items="[0-17, 18-29, 30-54, 54+]"
+                  :items="[ '0-17', '18-29', '30-54', '54+' ]"
                   label="Age*"
                   required
                 ></v-select>
               </v-col>
               <v-col cols="12" sm="6">
                 <v-autocomplete
-                  :items="[Skiing, Ice hockey, Soccer, Basketball, Hockey, Reading, Writing, Coding, Basejump]"
+                  :items="[ 'Skiing', 'Ice hockey', 'Soccer', 'Basketball', 'Hockey', 'Reading','Writing', 'Coding', 'Basejump' ]"
                   label="Interests"
                   multiple
                 ></v-autocomplete>
@@ -56,7 +55,6 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-  </v-row>
 </template>
 
 <script>
