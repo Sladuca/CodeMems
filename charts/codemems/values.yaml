@@ -10,6 +10,10 @@
 replicaCount: 1
 pullPolicy: IfNotPresent
 
+ingress:
+  name: "minikube-ingress" 
+  host: "minikube.codemems.io"
+
 card-registry:
   rabbit:
     host: "rabbitmq.default.svc.cluster.local"
