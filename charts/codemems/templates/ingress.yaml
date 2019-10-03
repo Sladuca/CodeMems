@@ -9,12 +9,12 @@ spec:
       paths:
       - path: /note-registry
         backend:
-          serviceName: {{ note-registry.name }}
-          servicePort: {{ note-registry.clusterPort }}
+          serviceName: {{ noteRegistry.name }}
+          servicePort: {{ noteRegistry.clusterPort }}
       - path: /card-registry
         backend:
-          serviceName: {{ card-registry.name }}
-          servicePort: {{ card-registry.clusterPort }}
+          serviceName: {{ cardRegistry.name }}
+          servicePort: {{ cardRegistry.clusterPort }}
       - path: /data-pipeline
-          serviceName: {{ data-pipeline.name }}
-          servicePort: {{ data-pipeline.clusterPort }}
+          serviceName: {{ dataPipeline.name }}
+          servicePort: {{ dataPipeline.clusterPort }}
