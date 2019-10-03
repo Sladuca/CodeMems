@@ -8,35 +8,18 @@ dependencies:
   - name: mongodb-replicaset
     repository: "@stable"
     version: 3.9.6
-    import-values:
-      - child: serivce
-        parent: mongo
   - name: card-registry
     repository: "@local"
     version: 0.1.0
-    import-values:
-      - card-registry
   - name: note-registry
     repository: "@local" 
     version: 0.1.0
-    import-values:
-      - child: service
-        parent: note-registry
   - name: data-pipeline
     repository: "@local"
     version: 0.1.0
-    import-values:
-      - child: service
-        parent: data-pipeline
   - name: scheduler
     repository: "@local"
     version: 0.1.0
-    import-values:
-      - child: service
-        parent: scheduler
   - name: frontend
     repository: "@local"
     version: 0.1.0
-    import-values:
-      - child: service
-        parent: frontend
