@@ -24,19 +24,19 @@ dependencies:
         parent: note-registry
   - name: data-pipeline
     repository: "@local"
-    version: 0.0.1
+    version: 0.1.0
     import-values:
       - child: service
         parent: data-pipeline
   - name: scheduler
     repository: "@local"
-    version: 0.0.1
+    version: 0.1.0
     import-values:
       - child: service
         parent: scheduler
   - name: frontend
     repository: "@local"
-    version: 0.0.1
+    version: 0.1.0
     import-values:
       - child: service
         parent: frontend
