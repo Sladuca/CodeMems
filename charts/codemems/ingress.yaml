@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: {{ .Values.ingress.name }}
+spec:
+  rules:
+  - host: {{ .Values.ingress.host }}
+    http:
+      paths:
+      - path: /note-registry
+        backend:
+          serviceName: {{ note-registry.name }}
+          servicePort: {{ note-registry.clusterPort }}
+      - path: /card-registry
+        backend:
+          serviceName: {{ card-registry.name }}
+          servicePort: {{ card-registry.clusterPort }}
+      - path: /data-pipeline
+          serviceName: {{ data-pipeline.name }}
+          servicePort: {{ data-pipeline.clusterPort }}
