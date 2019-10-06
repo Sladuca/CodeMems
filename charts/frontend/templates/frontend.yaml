@@ -22,3 +22,7 @@ spec:
               # port of the container to expose to incoming http
               containerPort: {{ .Values.service.containerPort }}
               protocol: TCP
+    selector:
+      app: "codemems"
+      component: {{ .Values.service.name }}
+      environment: {{ .Values.deployment.env }}

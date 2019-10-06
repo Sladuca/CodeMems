@@ -30,3 +30,7 @@ spec:
               value: "{{ .Release.Name }}-{{ .Values.mongo.host }}"
             - name: MONGO_PORT
               value: "{{ .Values.mongo.port }}"
+    selector:
+      app: "codemems"
+      component: {{ .Values.service.name }}
+      environment: {{ .Values.deployment.env }}
