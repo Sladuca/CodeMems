@@ -4,6 +4,7 @@ deployment:
   repository: "sladuca/codemems"
   tag: "note_registry"
   name: "note-registry"
+  env: "minikube"
 
 service:
   clusterPort: 8000

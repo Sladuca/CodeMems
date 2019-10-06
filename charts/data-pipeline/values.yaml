@@ -3,8 +3,10 @@ deployment:
   pullPolicy: IfNotPresent
   repository: "sladuca/codemems"
   tag: "data_pipeline"
+  env: "minikube"
 
 service:
+  name: "data-pipeline-service"
   clusterPort: 8000
   podPort: 8000
   containerPort: 8000

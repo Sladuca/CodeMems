@@ -4,7 +4,7 @@ deployment:
   repository: "sladuca/codemems"
   tag: "card_registry"
   name: "card-registry"
-  env: "dev"
+  env: "minikube"
 
 service:
   clusterPort: 8000

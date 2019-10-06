@@ -2,11 +2,11 @@ deployment:
   replicaCount: 1
   purllPolicy: IfNotPresent
   repository: "sladuca/codemems"
-  tag: "scheduler"
-  name: "scheduler"
+  tag: "frontend"
+  name: "frontend"
 
 service:
   clusterPort: 8000
   podPort: 8000
   NodePort: 30003
-  name: "scheduler-service"
+  name: "frontend-service"
