@@ -8,7 +8,7 @@ spec:
   ports:
     - port: {{ .Values.clusterPort }}
       name: schedulerService
-      target-port: {{ .values.podPort }}
+      target-port: {{ .Values.podPort }}
       NodePort: {{ .Values.ExternalPort }}
       protocol: TCP
 ---
