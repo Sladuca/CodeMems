@@ -10,6 +10,7 @@ spec:
       labels:
         app: "codemems"
         component: {{ .Values.deployment.name }}
+        environment: {{ .Values.deployment.env }}
     spec:
       containers:
         # docker container to use 
