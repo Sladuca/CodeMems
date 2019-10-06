@@ -16,5 +16,6 @@ spec:
           serviceName: {{ .Values.cardRegistry.name }}
           servicePort: {{ .Values.cardRegistry.clusterPort }}
       - path: /data-pipeline
+        backend:
           serviceName: {{ .Values.dataPipeline.name }}
           servicePort: {{ .Values.dataPipeline.clusterPort }}
