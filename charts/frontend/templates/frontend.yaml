@@ -21,7 +21,3 @@ spec:
               # port of the container to expose to incoming http
               containerPort: {{ .Values.service.containerPort }}
               protocol: TCP
-            # environment variables to set within the container upon startup
-          env:
-            - name: RABBIT_HOST
-              value: {{ .Release.Name }}-{{ .Values.rabbit.host }}
