@@ -2,6 +2,7 @@ deployment:
   replicaCount: 1
   pullPolicy: IfNotPresent
   repository: "sladuca/codemems"
+  name: "data-pipeline"
   tag: "data_pipeline"
   env: "minikube"
 
