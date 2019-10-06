@@ -2,21 +2,26 @@ dependencies:
   - name: nginx-ingress
     repository: "@stable"
     version: 1.17.1
+    alias: nginxIngress
   - name: rabbitmq
     repository: "@stable"
     version: 6.4.2
   - name: mongodb-replicaset
     repository: "@stable"
     version: 3.9.6
+    alias: mongo
   - name: card-registry
     repository: "@local"
     version: 0.1.0
+    alias: cardRegistry
   - name: note-registry
     repository: "@local" 
     version: 0.1.0
+    alias: noteRegistry
   - name: data-pipeline
     repository: "@local"
     version: 0.1.0
+    alias: dataPipeline
   - name: scheduler
     repository: "@local"
     version: 0.1.0
