@@ -14,7 +14,7 @@ spec:
       containers:
         # docker container to use 
         - name: {{ .Values.deployment.name }}
-          image: {{ .Values.deployment.repository }}:{{ .Values.deplotment.tag }}
+          image: {{ .Values.deployment.repository }}:{{ .Values.deployment.tag }}
           imagePullPolicy: {{ .Values.deployment.pullPolicy }}
           ports:
             - name: http
