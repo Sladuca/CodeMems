@@ -8,5 +8,6 @@ deployment:
 service:
   clusterPort: 8000
   podPort: 8000
+  containerPort: 8080
   NodePort: 30003
   name: "frontend-service"
