@@ -1,10 +1,18 @@
-# the jawn itself
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ .Values.deployment.name }}
+  labels:
+    app: "codemems"
+    component: {{ .Values.deployment.name }}
+    environment: {{ .Values.deployment.env }}
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: "codemems"
+      component: {{ .Values.deployment.name }}
+      environment: {{ .Values.deployment.env }}
   template:
     metadata:
       labels:
@@ -30,7 +38,3 @@ spec:
               value: "{{ .Release.Name }}-{{ .Values.mongo.host }}"
             - name: MONGO_PORT
               value: "{{ .Values.mongo.port }}"
-    selector:
-      app: "codemems"
-      component: {{ .Values.service.name }}
-      environment: {{ .Values.deployment.env }}

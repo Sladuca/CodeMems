@@ -3,8 +3,16 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ .Values.deployment.name }}
+    app: "codemems"
+    component: {{ .Values.deployment.name }}
+    environment: {{ .Values.deployment.env }}
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: "codemems"
+      component: {{ .Values.deployment.name }}
+      environment: {{ .Values.deployment.env }}
   template:
     metadata:
       labels:
