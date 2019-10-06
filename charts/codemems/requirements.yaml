@@ -1,14 +1,14 @@
 dependencies:
   - name: nginx-ingress
     repository: "@stable"
-    version: 1.17.1
+    version: ~1.17.1
     alias: nginxIngress
   - name: rabbitmq
     repository: "@stable"
-    version: 6.4.2
+    version: ~6.8.2
   - name: mongodb-replicaset
     repository: "@stable"
-    version: 3.9.6
+    version: ~3.10.1
     alias: mongo
   - name: card-registry
     repository: "@local"
