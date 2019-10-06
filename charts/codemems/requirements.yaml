@@ -1,7 +1,7 @@
 dependencies:
   - name: nginx-ingress
     repository: "@stable"
-    version: ~1.17.1
+    version: ~1.24.0
     alias: nginxIngress
   - name: rabbitmq
     repository: "@stable"
