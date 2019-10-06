@@ -1,0 +1,37 @@
+# the jawn itself
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.deployment.name }}
+  labels:
+    app: "codemems"
+    component: {{ .Values.deployment.name }}
+    environment: {{ .Values.deployment.env }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "codemems"
+      component: {{ .Values.deployment.name }}
+      environment: {{ .Values.deployment.env }}
+  template:
+    metadata:
+      labels:
+        app: "codemems"
+        component: {{ .Values.deployment.name }}
+        environment: {{ .Values.deployment.env }}
+    spec:
+      containers:
+        # docker container to use 
+        - name: {{ .Values.deployment.name }}
+          image: {{ .Values.deployment.repository }}:{{ .Values.deployment.tag }}
+          imagePullPolicy: {{ .Values.deployment.pullPolicy }}
+          ports:
+            - name: http
+              # port of the container to expose to incoming http
+              containerPort: {{ .Values.service.containerPort }}
+              protocol: TCP
+    selector:
+      app: "codemems"
+      component: {{ .Values.service.name }}
+      environment: {{ .Values.deployment.env }}
