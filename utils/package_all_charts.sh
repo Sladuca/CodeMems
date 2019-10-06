@@ -1,5 +1,9 @@
 REPO="$(dirname $0)/../charts/repo" 
-for d in */; do
-  helm package $d -d $REPO # package the chart into the repo
-  helm repo index $REPO # reindex the repo with the new chart
+CHARTS="$(dirname $0)/../charts/"
+for d in CHARTS; do
+  # only grab dirs
+  if [ -d "$f" ]; then
+    helm package $d -d $REPO # package the chart into the repo
+    helm repo index $REPO # reindex the repo with the new chart
+  fi
 done
