@@ -1,11 +1,17 @@
-replicaCount: 1
-pubbPolicy: IfNotPresent
+deployment:
+  replicaCount: 1
+  pullPolicy: IfNotPresent
+  repository: "sladuca/codemems"
+  tag: "scheduler"
+  name: "scheduler"
+  env: "minikube"
 
-repository: "sladuca/codemems"
-tag: "scheduler"
-
-clusterPort: 8000
-podPort: 8000
-NodePort: 30003
-
-rabbitHost: "rabbitmq.default.svc.cluster.local"
+service:
+  clusterPort: 8000
+  podPort: 8000
+  containerPort: 8000
+  NodePort: 30000
+  name: "scheduler-service"
+  
+rabbit:
+  host: "rabbitmq.default.svc.cluster.local"
