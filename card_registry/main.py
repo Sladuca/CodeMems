@@ -53,6 +53,7 @@ async def setup_mongo(app, loop):
                                                              io_loop=loop)
     app.mongo = app.mongoClient['CardRegistry']
     app.cards = app.mongo['cards']
+    app.decks = app.mongo['decks']
 
 @app.listener('before_server_start')
 async def setup_rabbit(app, loop):
@@ -67,9 +68,13 @@ async def setup_rabbit(app, loop):
 
 ##### main functionality #####
 
-@app.route('/')
-async def show_hellos(request):
-    return response.json(app.hellos)
+@app.route('/add-deck')
+async def add_deck(request):
+    await res = app.decks.insert_one(request.data)
+    if !res.acknowledged:
+        return response.text("failed to add deck to database", status=500)
+    return response.json({ _id: res.inserted_id}, status=200)
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000)
