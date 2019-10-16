@@ -1,4 +1,4 @@
-import Vue 'vue'
+import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 
@@ -45,20 +45,18 @@ const decksModule = {
   },
   actions: {
     async addDeck(context, newDeck) {
-      newDeck.id = uuid();
+      console.log(newDeck)
       const res = await axios.post(
-        "https://raw.githubusercontent.com/Sladuca/CodeMems/master/frontend/placeholder/decks.json", 
+        "minikube.codemems.io/card-registry/add-deck",
         newDeck
       )
       context.commit('newDeck', res.data)
-      */
-      context.commit('newDeck', newDeck)
     },
     async getDecks(context) {
       const res = await axios.get(
-        "https://raw.githubusercontent.com/Sladuca/CodeMems/master/frontend/placeholder/decks.json" 
+        "https://raw.githubusercontent.com/Sladuca/CodeMems/master/frontend/placeholder/decks.json"
       )
-    context.commit('setDecks', res.data)
+      context.commit('setDecks', res.data)
     },
   },
 }

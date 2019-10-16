@@ -45,7 +45,6 @@ export default {
     onSave(e) {
       // hardcode these for now
       const newDeck = {
-        "_id": Math.random() * (999999 - 1000) + 1000,
         "userId": 0,
         "title": this.deckName,
         "numToReview": 0,
