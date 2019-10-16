@@ -1,4 +1,4 @@
-import Vue from 'vue'
+import Vue 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 
@@ -45,7 +45,8 @@ const decksModule = {
   },
   actions: {
     async addDeck(context, newDeck) {
-      /*const res = await axios.post(
+      newDeck.id = uuid();
+      const res = await axios.post(
         "https://raw.githubusercontent.com/Sladuca/CodeMems/master/frontend/placeholder/decks.json", 
         newDeck
       )
@@ -53,8 +54,6 @@ const decksModule = {
       */
       context.commit('newDeck', newDeck)
     },
-    async addNote(context, newNote) {},
-    async updateNote(context, noteId) {},
     async getDecks(context) {
       const res = await axios.get(
         "https://raw.githubusercontent.com/Sladuca/CodeMems/master/frontend/placeholder/decks.json" 
